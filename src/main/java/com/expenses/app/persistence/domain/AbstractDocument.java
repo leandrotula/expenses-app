@@ -1,4 +1,4 @@
-package com.expenses.app.domain;
+package com.expenses.app.persistence.domain;
 
 import java.math.BigInteger;
 
