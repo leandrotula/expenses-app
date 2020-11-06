@@ -1,7 +1,7 @@
 package com.expenses.app.persistence.domain.repository;
 
-import com.expenses.app.persistence.domain.ExpensesItem;
-import org.springframework.data.mongodb.repository.MongoRepository;
+import com.expenses.app.persistence.domain.Expenses;
+import org.springframework.data.jpa.repository.JpaRepository;
 
-public interface ExpensesRepository extends MongoRepository<ExpensesItem, Long> {
+public interface ExpensesRepository extends JpaRepository<Long, Expenses> {
 }

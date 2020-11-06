@@ -1,6 +1,6 @@
 package com.expenses.app.persistence.domain;
 
-import com.expenses.app.persistence.domain.repository.ExpensesRepository;
+import com.expenses.app.persistence.domain.repository.MongoExpensesRepository;
 import com.expenses.app.port.domain.ExpensesCommandItem;
 import com.expenses.app.port.out.SaveExpensesPort;
 import lombok.extern.slf4j.Slf4j;
@@ -11,7 +11,7 @@ import org.springframework.stereotype.Component;
 @Slf4j
 public class ExpensesPersistenceAdapter implements SaveExpensesPort {
 
-    private ExpensesRepository expensesRepository;
+    private MongoExpensesRepository mongoExpensesRepository;
 
     @Override
     public void saveExpenseRecord(final ExpensesCommandItem commandItem) {
@@ -25,12 +25,12 @@ public class ExpensesPersistenceAdapter implements SaveExpensesPort {
 
         log.info("About to save expense item {}", expenses);
 
-        this.expensesRepository.save(expenses);
+        this.mongoExpensesRepository.save(expenses);
 
     }
 
     @Autowired
-    public void setExpensesRepository(final ExpensesRepository expensesRepository) {
-        this.expensesRepository = expensesRepository;
+    public void setExpensesRepository(final MongoExpensesRepository mongoExpensesRepository) {
+        this.mongoExpensesRepository = mongoExpensesRepository;
     }
 }
