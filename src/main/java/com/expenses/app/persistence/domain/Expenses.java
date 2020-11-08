@@ -24,4 +24,5 @@ public class Expenses {
     private LocalDateTime creationDate;
     private LocalDateTime DueDate;
     private Long amount;
+    private String description;
 }

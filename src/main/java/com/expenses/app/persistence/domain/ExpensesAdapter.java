@@ -6,6 +6,8 @@ import com.expenses.app.port.out.SaveExpensesPort;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import java.time.LocalDateTime;
+
 @Component
 public class ExpensesAdapter implements SaveExpensesPort {
 
@@ -19,13 +21,23 @@ public class ExpensesAdapter implements SaveExpensesPort {
     @Override
     public void saveExpenseRecord(ExpensesCommandItem expensesCommand) {
 
-        final Expenses expenses = Expenses.builder()
-                .creationDate(expensesCommand.getRequestedDate())
+        final Expenses.ExpensesBuilder builder = Expenses.builder();
+
+        if (expensesCommand.getRequestedDate() ==  null) {
+
+            builder.creationDate(LocalDateTime.now());
+        } else {
+            builder.creationDate(expensesCommand.getRequestedDate());
+        }
+
+        builder
                 .type(expensesCommand.getExpensesType().getDescription())
-                //.amount(expensesCommand.getAmount())
+                .amount(expensesCommand.getAmount())
+                .DueDate(expensesCommand.getDueDate())
+                .description(expensesCommand.getName())
                 .build();
 
-        this.expensesRepository.save(expenses);
+        this.expensesRepository.save(builder.build());
 
     }
 }
