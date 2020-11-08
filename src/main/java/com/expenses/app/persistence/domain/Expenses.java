@@ -1,9 +1,8 @@
 package com.expenses.app.persistence.domain;
 
+import lombok.AllArgsConstructor;
 import lombok.Builder;
-import lombok.Getter;
 import lombok.NoArgsConstructor;
-import lombok.Setter;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -14,6 +13,7 @@ import java.time.LocalDateTime;
 @Entity
 @Table(name = "EXPENSES")
 @NoArgsConstructor
+@AllArgsConstructor
 @Builder
 public class Expenses {
 
@@ -22,4 +22,6 @@ public class Expenses {
     private Long id;
     private String type;
     private LocalDateTime creationDate;
+    private LocalDateTime DueDate;
+    private Long amount;
 }
