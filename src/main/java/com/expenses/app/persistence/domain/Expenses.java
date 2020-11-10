@@ -2,6 +2,7 @@ package com.expenses.app.persistence.domain;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.Entity;
@@ -15,11 +16,11 @@ import java.time.LocalDateTime;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
+@Getter
 public class Expenses {
 
     @Id
-    @GeneratedValue
-    private Long id;
+    private String id;
     private String type;
     private LocalDateTime creationDate;
     private LocalDateTime DueDate;

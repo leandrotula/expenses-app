@@ -4,10 +4,9 @@ import com.expenses.app.persistence.domain.ExpensesType;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.*;
-import org.hibernate.validator.constraints.NotBlank;
-import org.hibernate.validator.constraints.NotEmpty;
 
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 import java.time.LocalDateTime;
 
 @NoArgsConstructor
@@ -17,10 +16,14 @@ import java.time.LocalDateTime;
 @Setter
 public class ExpensesCommandItem {
 
+    @NotNull(message = "id is mandatory")
+    private String id;
+
     @NotNull(message = "amount is mandatory")
     private Long amount;
 
     @NotNull(message = "name is mandatory")
+    @Size(max = 10)
     private String name;
 
     @JsonProperty("type")

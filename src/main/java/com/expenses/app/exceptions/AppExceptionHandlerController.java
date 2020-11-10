@@ -1,5 +1,6 @@
 package com.expenses.app.exceptions;
 
+import com.expenses.app.exceptions.custom.RecordPresentException;
 import com.expenses.app.exceptions.model.ApiError;
 import com.expenses.app.exceptions.model.ExpensesError;
 import lombok.extern.slf4j.Slf4j;
@@ -19,8 +20,8 @@ import java.util.stream.Collectors;
 @Slf4j
 public class AppExceptionHandlerController {
 
-    @ExceptionHandler(DuplicateKeyException.class)
-    public final ResponseEntity<ApiError> handleDuplicateKeyException(final DuplicateKeyException ex) {
+    @ExceptionHandler(RecordPresentException.class)
+    public final ResponseEntity<ApiError> handleDuplicateKeyException(final RecordPresentException ex) {
         log.error("Duplicate key error - Response status {}", HttpStatus.CONFLICT, ex);
         return buildBasicError(ex, HttpStatus.CONFLICT);
     }
