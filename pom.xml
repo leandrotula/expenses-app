@@ -10,7 +10,7 @@
 	</parent>
 	<groupId>com.expenses</groupId>
 	<artifactId>app</artifactId>
-	<version>0.0.1-SNAPSHOT</version>
+	<version>1.1.1</version>
 	<name>app</name>
 	<description>Expenses microservice </description>
 
