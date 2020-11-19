@@ -1,5 +1,6 @@
 package com.expenses.app.persistence.domain;
 
+import com.expenses.app.exceptions.custom.RecordPresentException;
 import com.expenses.app.persistence.domain.repository.ExpensesRepository;
 import com.expenses.app.port.domain.ExpensesCommandItem;
 import com.expenses.app.port.out.SaveExpensesPort;
@@ -19,7 +20,9 @@ public class ExpensesAdapter implements SaveExpensesPort {
     }
 
     @Override
-    public void saveExpenseRecord(ExpensesCommandItem expensesCommand) {
+    public void saveExpenseRecord(final ExpensesCommandItem expensesCommand) {
+
+        validateDuplicateRecord(expensesCommand);
 
         final Expenses.ExpensesBuilder builder = Expenses.builder();
 
@@ -32,6 +35,7 @@ public class ExpensesAdapter implements SaveExpensesPort {
 
         builder
                 .type(expensesCommand.getExpensesType().getDescription())
+                .id(expensesCommand.getId())
                 .amount(expensesCommand.getAmount())
                 .DueDate(expensesCommand.getDueDate())
                 .description(expensesCommand.getName())
@@ -39,5 +43,12 @@ public class ExpensesAdapter implements SaveExpensesPort {
 
         this.expensesRepository.save(builder.build());
 
+    }
+
+    private void validateDuplicateRecord(final ExpensesCommandItem expensesCommand) {
+
+        expensesRepository.getById(expensesCommand.getId()).ifPresent(value -> {
+            throw new RecordPresentException(String.format("Record %s was already present in the db ", value.getDescription()));
+        });
     }
 }
