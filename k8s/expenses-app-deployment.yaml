@@ -19,11 +19,7 @@ spec:
           image: leandrotula/expenses-backend:1.1.1
           ports:
             - containerPort: 8081
-            - name: DB_PORT
-              valueFrom:
-                configMapKeyRef:
-                  name: expensesapp-configmap
-                  key: db_port
+          env:
             - name: DB_PASSWORD
                 valueFrom:
                   configMapKeyRef:

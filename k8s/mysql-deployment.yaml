@@ -29,12 +29,6 @@ spec:
               value: root
             - name: MYSQL_DATABASE
               value: expenses-app
-            - name: MYSQL_USER
-              value: root
-            - name: MYSQL_PASSWORD
-              value: root
-            - name: MYSQL_ALLOW_EMPTY_PASSWORD
-              value: 'no'
       volumes:
         - name: mysql-data
           persistentVolumeClaim:
