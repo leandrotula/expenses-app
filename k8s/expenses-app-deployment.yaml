@@ -39,3 +39,4 @@ spec:
               valueFrom:
                 configMapKeyRef:
                   name: expensesapp-configmap
+                  key: profile

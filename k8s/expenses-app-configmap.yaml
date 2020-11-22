@@ -7,3 +7,4 @@ data:
   profile: prod
   db_user: root
   db_password: root
+  database_name: expenses_app

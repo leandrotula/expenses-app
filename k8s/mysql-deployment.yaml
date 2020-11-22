@@ -26,9 +26,15 @@ spec:
               #To keep in mind this is really bad. This is an initial version, later i'm gonna use secrets instead
           env:
             - name: MYSQL_ROOT_PASSWORD
-              value: root
+              valueFrom:
+                   secretKeyRef:
+                           name: db-secret
+                           key: db-root-password
             - name: MYSQL_DATABASE
-              value: expenses_app
+              valueFrom:
+                   configMapKeyRef:
+                           name: expensesapp-configmap
+                           key: database_name
       volumes:
         - name: mysql-data
           persistentVolumeClaim:
