@@ -1,0 +1,42 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: expenses-app
+  labels:
+    app: app
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: app
+  template:
+    metadata:
+      labels:
+        app: app
+    spec:
+      containers:
+        - name: expenses-app
+          image: leandrotula/expenses-backend:1.1.1
+          ports:
+            - containerPort: 8081
+          env:
+            - name: DB_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: db-secret
+                  key: db-root-password
+            - name: DB_USER
+              valueFrom:
+                secretKeyRef:
+                  name: db-secret
+                  key: db-root-username
+            - name: DB_HOST
+              valueFrom:
+                configMapKeyRef:
+                  name: expensesapp-configmap
+                  key: db_host
+            - name: PROFILE
+              valueFrom:
+                configMapKeyRef:
+                  name: expensesapp-configmap
+                  key: profile

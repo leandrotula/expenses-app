@@ -1,0 +1,41 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: mysql-deployment
+  labels:
+    app: mysql
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: mysql
+  template:
+    metadata:
+      labels:
+        app: mysql
+    spec:
+      containers:
+        - name: mysql
+          image: mysql:5.7
+          ports:
+            - containerPort: 3306
+          volumeMounts:
+            - mountPath: "/var/lib/mysql"
+              subPath: "mysql"
+              name: mysql-data
+              #To keep in mind this is really bad. This is an initial version, later i'm gonna use secrets instead
+          env:
+            - name: MYSQL_ROOT_PASSWORD
+              valueFrom:
+                   secretKeyRef:
+                           name: db-secret
+                           key: db-root-password
+            - name: MYSQL_DATABASE
+              valueFrom:
+                   configMapKeyRef:
+                           name: expensesapp-configmap
+                           key: database_name
+      volumes:
+        - name: mysql-data
+          persistentVolumeClaim:
+            claimName: mysql-data-disk

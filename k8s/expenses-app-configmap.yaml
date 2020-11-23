@@ -1,0 +1,8 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: expensesapp-configmap
+data:
+  db_host: mysql-service
+  profile: prod
+  database_name: expenses_app
