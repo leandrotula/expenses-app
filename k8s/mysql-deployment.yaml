@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
         - name: mysql
-          image: mysql:5.6
+          image: mysql:5.7
           ports:
             - containerPort: 3306
           volumeMounts:
@@ -28,7 +28,7 @@ spec:
             - name: MYSQL_ROOT_PASSWORD
               value: root
             - name: MYSQL_DATABASE
-              value: expenses-app
+              value: expenses_app
       volumes:
         - name: mysql-data
           persistentVolumeClaim:
