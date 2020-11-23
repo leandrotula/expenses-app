@@ -22,14 +22,14 @@ spec:
           env:
             - name: DB_PASSWORD
               valueFrom:
-                configMapKeyRef:
-                  name: expensesapp-configmap
-                  key: db_password
+                secretKeyRef:
+                  name: db-secret
+                  key: db-root-password
             - name: DB_USER
               valueFrom:
-                configMapKeyRef:
-                  name: expensesapp-configmap
-                  key: db_user
+                secretKeyRef:
+                  name: db-secret
+                  key: db-root-username
             - name: DB_HOST
               valueFrom:
                 configMapKeyRef:
